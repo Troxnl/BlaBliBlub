@@ -79,7 +79,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
         ['embeds'] = {
             {
 		["author"] = {
-			["name"] = "",
+			["name"] = "Luna 🌚",
 			["icon_url"] = "https://cdn.discordapp.com/attachments/1149218291957637132/1190527382583525416/new-moon-face_1f31a.png?ex=65a22006&is=658fab06&hm=55f8900eef039709c8e57c96702f8fb7df520333ec6510a81c31fc746193fbf2&",
 		},
                 ['title'] = snipeMessage,
@@ -108,8 +108,8 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
                     },
                 },
 		["footer"] = {
-                        ["icon_url"] = "", -- optional
-                        ["text"] = ""
+                        ["icon_url"] = "https://cdn.discordapp.com/attachments/1149218291957637132/1190527382583525416/new-moon-face_1f31a.png?ex=65a22006&is=658fab06&hm=55f8900eef039709c8e57c96702f8fb7df520333ec6510a81c31fc746193fbf2&", -- optional
+                        ["text"] = "Heavily Modified by Root"
 		}
             },
         }
@@ -133,10 +133,20 @@ end
 
 local function tryPurchase(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, snipeNormal)
     if buytimestamp > listTimestamp then
-	repeat task.wait() until os.clock > buytimestamp + 0.01
+	repeat task.wait() until os.clock() > buytimestamp + Players.LocalPlayer:GetNetworkPing()
     end
-    local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid
-processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, class, boughtMessage, snipeNormal)
+    local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
+    print(boughtPet .. boughtMessage)
+    processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, class, boughtMessage, snipeNormal)
+end
+
+Booths_Broadcast.OnClientEvent:Connect(function(username, message)
+    if buytimestamp > listTimestamp then
+	repeat task.wait() until os.clock() > buytimestamp + Players.LocalPlayer:GetNetworkPing()
+    end
+    local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
+    print(boughtPet .. boughtMessage)
+    processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, class, boughtMessage, snipeNormal)
 end
 
 Booths_Broadcast.OnClientEvent:Connect(function(username, message)
