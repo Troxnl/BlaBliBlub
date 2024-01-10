@@ -59,14 +59,11 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     else
 	webcolor = tonumber(0xff0000)
 	weburl = webhookFail
+	webContent = failMessage
 	snipeMessage = snipeMessage .. " ⛔️ ".. amount .."x "
 	if snipeNormal == true then
 	    snipeNormal = false
 	end
-    end
-
-    if not failMessage then
-	failMessage = "Success!"
     end
 	
     snipeMessage = snipeMessage .. "**" .. versionStr
@@ -83,7 +80,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
             {
 		["author"] = {
 			["name"] = "",
-			["icon_url"] = "https://cdn.discordapp.com/attachments/1189611756587319316/1194401087701123254/Moon.png?ex=65b037b2&is=659dc2b2&hm=939c32bb3daa7bbaa128ef7aaa206b1686593f76d36682bea0ee375542122b8f&",
+			["icon_url"] = "https://i.imgur.com/aECHhQG.png",
 		},
                 ['title'] = snipeMessage,
                 ["color"] = webcolor,
@@ -109,18 +106,15 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
                         ['name'] = "__PetID:__",
                         ['value'] = "||"..tostring(uid).."||",
                     },
-		    {
-                        ['name'] = "__Status:__",
-                        ['value'] = failMessage,
-                    },
+		    
 		    {
                         ['name'] = "🌐:",
                         ['value'] = math.round(Players.LocalPlayer:GetNetworkPing() * 2000) .. "ms",
                     },
                 },
 		["footer"] = {
-                        ["icon_url"] = "https://cdn.discordapp.com/attachments/1189611756587319316/1194401087701123254/Moon.png?ex=65b037b2&is=659dc2b2&hm=939c32bb3daa7bbaa128ef7aaa206b1686593f76d36682bea0ee375542122b8f&", -- optional
-                        ["text"] = ""
+                        ["icon_url"] = "https://i.imgur.com/aECHhQG.png", -- optional
+                        ["text"] = "Woah!"
 		}
             },
         }
