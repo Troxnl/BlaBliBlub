@@ -79,7 +79,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
         ['embeds'] = {
             {
 		["author"] = {
-			["name"] = "",
+			["name"] = "WOAH!",
 			["icon_url"] = "https://i.imgur.com/aECHhQG.png",
 		},
                 ['title'] = snipeMessage,
