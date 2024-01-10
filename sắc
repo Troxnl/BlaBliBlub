@@ -44,7 +44,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
     local weburl, webContent, webcolor
     local versionVal = { [1] = "Golden ", [2] = "Rainbow " }
     local versionStr = versionVal[version] or (version == nil and "")
-    local mention = (Library.Directory.Pets[item].huge or Library.Directory.Pets[item].titanic) and "<@" .. userid .. ">" or ""
+    local mention = (type.huge or type.titanic) and "<@" .. userid .. ">" or ""
 	
     if boughtStatus then
 	webcolor = tonumber(0x00ff00)
@@ -92,7 +92,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
                     },
                     {
                         ['name'] = "🛒:",
-                        ['value'] = "||"..tostring(boughtFrom).."|| ",
+                        ['value'] = "||"..tostring(boughtFrom).."||",
                     },
                     {
                         ['name'] = "🔢:",
@@ -137,7 +137,7 @@ local function processListingInfo(uid, gems, item, version, shiny, amount, bough
 end
 
 local function tryPurchase(uid, gems, item, version, shiny, amount, username, class, playerid, buytimestamp, listTimestamp, snipeNormal)
-    repeat task.wait() until buytimestamp < workspace:GetServerTimeNow() - Players.LocalPlayer:GetNetworkPing())
+    repeat task.wait() until buytimestamp < workspace:GetServerTimeNow() - Players.LocalPlayer:GetNetworkPing()
     local boughtPet, boughtMessage = game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
     processListingInfo(uid, gems, item, version, shiny, amount, username, boughtPet, class, boughtMessage, snipeNormal)
 end
